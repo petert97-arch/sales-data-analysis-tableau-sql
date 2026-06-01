@@ -4,4 +4,4 @@ Overview: Created artificial sales data set in Snowflake and employed data clean
 
 Tools Used: Snowflake, SQL, Tableau
 
-Goal: 
+Goal: Transform raw sales data into actionable insights by tracking key performance indicators (KPIs), customer spending behavior, and product performance through interactive dashboards.
