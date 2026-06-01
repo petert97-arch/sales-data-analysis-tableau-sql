@@ -3,3 +3,9 @@ order_id INT,
 customer_name STRING, 
 product STRING, amount FLOAT, 
 order_DATE DATE);
+
+
+CREATE TABLE order_details (
+order_id INT,
+quantity INT, 
+price NUMBER);
