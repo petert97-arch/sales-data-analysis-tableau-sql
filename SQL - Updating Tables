@@ -1,0 +1,63 @@
+Query: 
+Purpose:
+
+
+
+UPDATE sales
+SET amount = 
+CASE
+ WHEN product = 'Laptop' THEN 1200
+ WHEN product = 'phone' THEN 800
+ WHEN product = 'tablet' THEN 400
+
+ WHEN product = 'Mouse' THEN UNIFORM (20, 100, RANDOM())
+ WHEN product = 'Monitor' THEN UNIFORM (150, 500, RANDOM())
+ WHEN product = 'Headphones' THEN UNIFORM(50, 300, RANDOM())
+ WHEN product = 'Keyboard' THEN UNIFORM(30, 150, RANDOM())
+ END 
+ WHERE amount is NULL;
+
+
+
+ UPDATE sales
+ SET amount = 
+ CASE
+ WHEN product = 'Laptop' THEN 1200
+ WHEN product = 'phone' THEN 800
+ WHEN product = 'tablet' THEN 400
+ 
+ WHEN product = 'USB Cable' THEN 20
+ WHEN product = 'Mouse' THEN 40
+ WHEN product = 'Monitor' THEN 200
+ WHEN product = 'Headphones' THEN 150
+ WHEN product = 'Keyboard' THEN 50
+ END
+ WHERE amount is NULL;
+
+
+
+ UPDATE sales
+ SET amount = 
+ CASE
+ WHEN product = 'phone' THEN 800
+ WHEN product = 'tablet' THEN 400
+ END
+ WHERE amount is NULL;
+
+
+
+ UPDATE sales
+SET amount = 
+    CASE 
+        WHEN UPPER(TRIM(product)) = 'LAPTOP' THEN 1200
+        WHEN UPPER(TRIM(product)) = 'PHONE' THEN 800
+        WHEN UPPER(TRIM(product)) = 'TABLET' THEN 400
+
+        WHEN UPPER(TRIM(product)) = 'MOUSE' THEN UNIFORM(20, 100, RANDOM())
+        WHEN UPPER(TRIM(product)) = 'MONITOR' THEN UNIFORM(150, 500, RANDOM())
+        WHEN UPPER(TRIM(product)) = 'HEADPHONES' THEN UNIFORM(50, 300, RANDOM())
+        WHEN UPPER(TRIM(product)) = 'KEYBOARD' THEN UNIFORM(30, 150, RANDOM())
+    END
+WHERE amount IS NULL;
+
+
