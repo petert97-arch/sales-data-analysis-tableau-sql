@@ -1,5 +1,5 @@
 Query: Create tables and insert artifical sales data
-Purpose: Design synthetic data sets to dervice business insights and KPIs 
+Purpose: Design synthetic data sets to derive business insights and KPIs 
 
 
 CREATE TABLE sales (
@@ -36,3 +36,31 @@ INSERT INTO order_details (order_id, quantity, price)VALUES
 (6, 4, 12.75),
 (7, 2, 25.00),
 (8, 1, 75.49);
+
+
+
+INSERT INTO sales (order_id, customer_name, product, order_date)
+SELECT 
+SEQ4() + 1 AS order_id,
+
+CASE UNIFORM(1, 10, RANDOM())
+WHEN 1 THEN 'John Smith'
+WHEN 2 THEN 'Emily Johnson'
+WHEN 3 THEN 'Michael Brown'
+WHEN 4 THEN 'Sarah Davis'
+WHEN 5 THEN 'David Wilson'
+WHEN 6 THEN 'Jessica Martinez'
+WHEN 7 THEN 'Daniel Anderson'
+WHEN 8 THEN 'Ashley Thomas'
+WHEN 9 THEN 'Christopher Taylor'
+ELSE 'Amanda White'
+END AS customer_name, 
+
+CASE UNIFORM (1, 6, RANDOM())
+WHEN 1 THEN 'Laptop'
+WHEN 2 THEN 'Mouse'
+WHEN 3 THEN 'Keyboard'
+WHEN 4 THEN 'Monitor'
+WHEN 5 THEN 'Headphones'
+ELSE 'USB Cable'
+END AS product,
