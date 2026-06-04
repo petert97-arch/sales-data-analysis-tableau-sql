@@ -1,0 +1,38 @@
+Query: Create tables and insert artifical sales data
+Purpose: Design synthetic data sets to dervice business insights and KPIs 
+
+
+CREATE TABLE sales (
+order_id INT,
+customer_name STRING, 
+product STRING, amount FLOAT, 
+order_DATE DATE);
+
+
+CREATE TABLE order_details (
+order_id INT,
+quantity INT, 
+price NUMBER);
+
+
+
+
+INSERT INTO sales VALUES
+(1, 'John Smith', 'Laptop', 1200, '2025-01-10'),
+(2, 'Jane Doe', 'Phone', 800, '2025-01-15'),
+(3, 'John Smith', 'Tablet', 400, '2025-02-01'),
+(4, 'Alice Brown', 'Laptop', 1200, '2025-02-10'),
+(5, 'Jane Doe', 'Laptop', 1200, '2025-03-05');
+
+
+INSERT INTO order_details (order_id, quantity, price)VALUES
+(1, 2, 19.99),
+(1, 1, 9.99),
+(2, 3, 5.50),
+(3, 1, 199.99),
+(3, 2, 49.99),
+(4, 5, 3.25),
+(5, 1, 999.00),
+(6, 4, 12.75),
+(7, 2, 25.00),
+(8, 1, 75.49);
