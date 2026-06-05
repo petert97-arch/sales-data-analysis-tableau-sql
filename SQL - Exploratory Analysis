@@ -1,0 +1,23 @@
+-- Query: Most Frequently Purchased Products
+-- Purpose: Identify which products are purchased most frequently.
+
+SELECT product, COUNT(*) AS total_orders
+FROM sales
+GROUP BY product
+ORDER BY total_orders DESC;
+
+-- Query: Count of Products Purchased per Customer
+-- Purpose: Analyze which products are most frequently purchased by each customer.
+
+SELECT customer_name, product, COUNT(product) AS total_products
+FROM sales
+GROUP BY customer_name, product;
+
+-- Query: Monthly Revenue Trend
+-- Purpose: Display total revenue per month to identify patterns over time.
+
+SELECT DATE_TRUNC('month', order_date) AS month,
+SUM(price) AS revenue
+FROM sales
+GROUP BY month
+ORDER BY month;
