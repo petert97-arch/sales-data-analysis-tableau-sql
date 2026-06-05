@@ -1,0 +1,55 @@
+-- Query: Derive Customer KPIs Summary
+-- Purpose: Calculate total orders, total revenue, average order value, last purchase date, and churn status for each customer.
+
+CREATE TABLE fact_orders_churn AS
+SELECT
+dim_customer.customer_name,
+COUNT(dim_orders.order_id) AS total_orders,
+SUM(fact_order_details.revenue) AS total_revenue,
+AVG(fact_order_details.revenue) AS avg_order_value,
+MAX(dim_orders.order_date) AS last_purchase_date,
+DATEDIFF(day, MAX(dim_orders.order_date), CURRENT_DATE) AS days_since_last_purchase, 
+CASE 
+WHEN DATEDIFF(day, MAX(dim_orders.order_date), CURRENT_DATE) > 90
+THEN 'Churned'
+ELSE 'Active'
+END AS churn_status
+FROM fact_order_details
+JOIN dim_orders ON dim_orders.order_id = fact_order_details.order_id
+JOIN dim_customer ON dim_customer.customer_key = dim_orders.customer_key
+GROUP BY dim_customer.customer_name;
+
+-- Query: Business KPI Summary
+-- Purpose: Calculate total orders, total revenue, and average order value for business reporting.
+
+SELECT
+  TO_CHAR(total_orders, '999,999,999') AS total_orders,
+  TO_CHAR(total_revenue, '$999,999,999.00') AS total_revenue,
+  TO_CHAR(avg_order_value, '$999,999,999.00') AS avg_order_value
+FROM fact_orders_churn;
+
+
+-- Query: Customer Total Revenue Segmentation
+-- Purpose: Classify customers into high, medium, and low value groups based on total revenue.
+
+SELECT
+  customer_name,
+  total_revenue,
+  CASE
+    WHEN total_revenue > 500000 THEN 'High Value'
+    WHEN total_revenue > 100000 THEN 'Medium Value'
+    ELSE 'Low Value'
+  END AS customer_segment
+FROM fact_orders_churn;
+
+
+
+-- Query: Identify Total Count of Each Product
+-- Purpose: Identify the most frequently sold products by total order count.
+
+SELECT product_name, COUNT(*)
+FROM dim_product
+JOIN fact_order_details
+ON dim_product.product_id = fact_order_details.product_id
+GROUP BY product_name
+ORDER BY COUNT(*) DESC;
