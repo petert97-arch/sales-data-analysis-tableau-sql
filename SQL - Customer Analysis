@@ -1,0 +1,32 @@
+-- Query: Customer Spending Summary
+-- Purpose: Rank customers by total spending to identify top revenue contributors.
+
+WITH customer_totals AS (
+SELECT customer_name, 
+SUM(price) AS total_spent
+FROM sales 
+GROUP BY customer_name
+)
+SELECT * 
+FROM customer_totals
+ORDER BY total_spent DESC;
+
+
+
+
+-- Query: High Value Customers
+-- Purpose: Identify high value customers whose total spending exceeds $2,000.
+
+WITH customer_totals AS (
+SELECT customer_name, 
+SUM(price) AS total_spent
+FROM sales 
+GROUP BY customer_name
+),
+high_value_customers AS 
+(
+SELECT customer_name, total_spent 
+FROM customer_totals
+where total_spent > 2000)
+SELECT * from high_value_customers;
+
